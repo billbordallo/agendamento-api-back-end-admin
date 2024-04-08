@@ -1,0 +1,1 @@
+INSERT INTO usuarios (pk_id_usuario, nome, sobrenome, login, email, senha, nome_empresa) VALUES (1, 'José', 'da Silva', 'admin', 'jose@email.com', '1234', 'Barbearia do José');
