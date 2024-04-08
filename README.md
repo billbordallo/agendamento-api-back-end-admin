@@ -15,7 +15,7 @@ Para rodar o sistema completo, é necessário clonar os 4 repositórios, localiz
 
 - **Repositório 3** - agendamento-api-front-end: é a interface pela qual os clientes do profissional liberal poderão realizar agendamentos. O sistema vai informar se o horário desejado está liberado ou não para agendamento.
 
-- **Repositório 4** - agendamento-api-back-end: contém uma API com o back-end do sistema de agendamentos e se comunica com o Repositório 3. Contém o banco de dados com os agendamentos realizados, informações do cliente que realizou o agendamento (nome, telefone, e-mail, endereço, serviço desejado, dia e hora desejados), bem como o status do agendamento.
+- **Repositório 4** - [agendamento-api-back-end](https://github.com/billbordallo/agendamento-api-back-end): contém uma API com o back-end do sistema de agendamentos e se comunica com o Repositório 3. Contém o banco de dados com os agendamentos realizados, informações do cliente que realizou o agendamento (nome, telefone, e-mail, endereço, serviço desejado, dia e hora desejados), bem como o status do agendamento.
 
 ## Como instalar e executar este repositório usando o Docker
 
