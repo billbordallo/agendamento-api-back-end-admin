@@ -7,7 +7,6 @@ import os
 # importando os elementos definidos no modelo
 from model.base import Base
 from model.servico import Servico
-from model.usuario import Usuario
 
 db_path = "database/"
 # Verifica se o diretorio não existe
@@ -31,23 +30,39 @@ if not database_exists(engine.url):
 # cria as tabelas do banco, caso não existam
 Base.metadata.create_all(engine)
 
-# Limpa a tabela 'usuario', caso existam dados, para inserir o conteúdo do arquivo 'usuario_db.sql'
+# Limpa a tabela 'servicos', caso existam dados, para inserir o conteúdo abaixo
 with engine.connect() as connection:
-    connection.execute(text("DELETE FROM usuarios"))
+    connection.execute(text("DELETE FROM servicos"))
     connection.commit()
 
-# Popula a tabela 'usuarios' com os dados do arquivo 'usuario_db.sql'
-with open('database/usuario_db.sql') as f:
-    data = f.read()
+# Popula a tabela 'servicos' com um serviços padrão (para fins de demonstração)
+servico_sql = text('INSERT INTO servicos (pk_id_servico, nome_servico, duracao_servico, desc_servico, valor_servico) VALUES (:pk_id_servico, :nome_servico, :duracao_servico, :desc_servico, :valor_servico)')
+servicos = [
+    {
+    "pk_id_servico": 1,
+    "nome_servico": 'Corte de cabelo masculino',
+    "duracao_servico": '40 minutos',
+    "desc_servico": 'Corte de cabelo ao gosto do cliente',
+    "valor_servico": 50,
+    },
+    {
+    "pk_id_servico": 2,
+    "nome_servico": 'Barba completa',
+    "duracao_servico": '30 minutos',
+    "desc_servico": 'Barba com relaxamento facial',
+    "valor_servico": 40,
+    },
+    {
+    "pk_id_servico": 3,
+    "nome_servico": 'Cabelo e barba',
+    "duracao_servico": '1 hora',
+    "desc_servico": 'Corte de cabelo e barba na mesma sessão',
+    "valor_servico": 80,
+    }
+]
 
-# Separa os comandos SQL no arquivo
-statements = data.split(';')
-
-# Executa os comandos SQL do arquivo
+# Executa os comandos SQL
 with engine.connect() as connection:
-    for statement in statements:
-        # Verifica e pula se existir um comando vazio
-        if statement.strip():
-            connection.execute(text(statement))
+    connection.execute(servico_sql, servicos)
     # Faz o commit no banco
     connection.commit()
