@@ -90,3 +90,29 @@ def get_servicos():
             return apresenta_servicos(servicos), 200
     finally:    
         session.close()
+
+@app.delete('/servico', tags=[servicos_tag],
+            responses={"200": ServicoDelSchema, "404": ErrorSchema})
+def del_servico(query: ServicoBuscaSchema):
+    """Deleta um Servico a partir do id do servico
+
+    Retorna uma mensagem de confirmação da remoção.
+    """
+    servico_id = query.id
+    print(servico_id)
+    logger.debug(f"Deletando dados sobre servico #{servico_id}")
+    # criando conexão com a base
+    session = Session()
+    # fazendo a remoção
+    count = session.query(Servico).filter(Servico.id == servico_id).delete()
+    session.commit()
+
+    if count:
+        # retorna a representação da mensagem de confirmação
+        logger.debug(f"Deletando servico #{servico_id}")
+        return {"mesage": "Servico removido", "id": servico_id}, 200
+    else:
+        # se o servico não foi encontrado
+        error_msg = "Servico não encontrado na base :/"
+        logger.warning(f"Erro ao deletar servico #'{servico_id}', {error_msg}")
+        return {"mesage": error_msg}, 404
