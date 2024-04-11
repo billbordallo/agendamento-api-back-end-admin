@@ -33,13 +33,13 @@ Para rodar este repositório usando o Docker (método recomendado), após clonar
 $ docker build -t agendamento-api-back-end-admin .
 ```
 
-Uma vez criada a imagem, para executar o container basta executar, **como administrador**, seguinte o comando:
+4. Uma vez criada a imagem, para executar o container basta executar, **como administrador**, seguinte o comando:
 
 ```
 $ docker run -d -p 5001:5001 agendamento-api-back-end-admin
 ```
 
-Uma vez executando, para acessar a API, basta abrir o [http://localhost:5001/#/](http://localhost:5001/#/) no navegador.
+5. Uma vez executando, para acessar a API, basta abrir o [http://localhost:5001/#/](http://localhost:5001/#/) no navegador.
 
 ## Como instalar e executar este repositório usando o Flask
 
